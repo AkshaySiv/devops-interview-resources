@@ -1,3 +1,12 @@
+### Cloud migration steps
+
+- **Preparation**: Assess the current environment, identify workloads for migration, and evaluate readiness.
+- **Planning**: Develop a detailed migration strategy, define timelines, and allocate resources.
+- **Migrate**: Execute the migration process, ensuring minimal disruption and data integrity.
+- **Monitor**: Continuously monitor the migrated workloads to ensure performance and stability.
+- **Optimize**: Fine-tune the environment for cost efficiency, scalability, and performance improvements.
+
+
 ### 1. What is cloud migration?
 Cloud migration refers to the process of moving applications, data, and workloads from on-premises environments or one cloud provider to another.
 
