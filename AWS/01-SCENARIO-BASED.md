@@ -75,7 +75,7 @@ You have generated or been given AWS secrets or AWS access keys to use during yo
 
 By implementing these practices, you can ensure the secure management of AWS access keys in your development environment.
 
-------------------------------
+-------------------------------------------------------------
 
 
 ### 1. **Scenario:** You have a microservices application that needs to scale dynamically based on traffic. How would you design an architecture for this using AWS services?

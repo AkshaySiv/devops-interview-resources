@@ -97,3 +97,27 @@ At the same time, you need to ensure robust authentication and authorization mec
     - Regularly audit and update service mesh configurations to address vulnerabilities.
 
 By implementing a service mesh with robust authentication and authorization, you can enhance the security, observability, and reliability of your microservices architecture.
+ 
+
+### **Question 4**  
+You are managing a critical production deployment application running on K8s. Your team needs to update an API key stored in a ConfigMap — without restarting the application or causing downtime.  
+**How would you ensure the new configuration is picked up dynamically?**
+
+### **Answer (Brief):**
+
+if we are using config map as environemnt variable. The application pod needs to be restarted to get the latest change. whereas configmap atttached as volume kubenernates will make sure the config map changes are reflected in 1-2 minutus
+
+1. **Dynamic Configuration Reload:**
+    - Ensure the application is designed to watch for changes in the mounted ConfigMap volume or environment variables.
+    - Use libraries or frameworks (e.g., Spring Cloud Kubernetes, Reloader) that support dynamic configuration reload.
+
+2. **Update the ConfigMap:**
+    - Update the ConfigMap using `kubectl apply` or `kubectl edit` to modify the API key.
+
+3. **Volume Mount Behavior:**
+    - ConfigMaps mounted as volumes are updated automatically when the ConfigMap changes. Ensure the application reads the configuration from the mounted volume.
+
+4. **Signal the Application:**
+    - If the application does not automatically reload the configuration, send a signal (e.g., SIGHUP) to trigger a reload without restarting the pod.
+
+By following these steps, you can update the API key in the ConfigMap without causing downtime or restarting the application.
