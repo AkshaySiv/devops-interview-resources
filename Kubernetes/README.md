@@ -2,6 +2,63 @@
 
 This document contains Kubernetes-related interview questions that I encountered during interviews.
 
+### **Question 1** 
+
+Write a Kubernetes Deployment manifest for an application named solution that meets the following requirements:
+
+Deploy 3 replicas of the application.
+
+The pods must be labeled with app: solution.
+
+Use the container image hub.example.com/shop-backend:1.0.0.
+
+Expose container port 3000.
+
+Configure a liveness probe to check /healthz on port 3000 with an initial delay of 10 seconds.
+
+Configure a readiness probe to check / on port 3000, with an initial delay of 10 seconds, a period of 1 second between checks, and a failure threshold of 2
+
+### **Answer:**
+
+```bash
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solution
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: solution
+  template:
+    metadata:
+      labels:
+        app: solution
+    spec:
+      containers:
+      - name: solution-container
+        image: hub.example.com/shop-backend:1.0.0
+        ports: 
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 10
+        readinessProbe: 
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 1
+          failureThreshold: 2
+```
+
+
+
+-------------------------------------------------
+
 ### **Question 1**  
 You are managing a K8s cluster on AWS using EKS. Recently your team has noticed that the deployment of a microservices-based application via CI/CD pipeline has become unreliable — sometimes the requirements fail, and other times the new versions of the services are not being picked up by the K8s nodes.  
 **How would you diagnose and troubleshoot the deployment issues in your EKS cluster?**  

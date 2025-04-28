@@ -75,7 +75,98 @@ You have generated or been given AWS secrets or AWS access keys to use during yo
 
 By implementing these practices, you can ensure the secure management of AWS access keys in your development environment.
 
--------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+
+
+### **Question 1**
+AWS service provides the most cost-optimal way to store large files that are infrequently accessed when the access time is not a priority.
+
+#### **Answer**
+**B. Amazon S3 Glacier**
+
+#### **Explanation**
+Amazon S3 Glacier is designed for long-term, infrequent access storage at a much lower cost compared to standard S3 storage. It's ideal for storing large files that are rarely accessed, and retrieval time is not a high priority.
+
+---
+
+### **Question 2**
+Which of the following correctly describes benefits of using EC2 Spot Instances over EC2 On-Demand Instances?
+
+#### **Answer**
+**A. Spot Instances come at reduced cost.**
+
+#### **Explanation**
+Spot Instances are available at a much lower price compared to On-Demand Instances, but they can be interrupted by AWS when the capacity is no longer available or the price goes above your bid.
+
+---
+
+### **Question 3**
+AWS service provides a history of actions taken by users via the AWS Management Console.
+
+#### **Answer**
+**B. CloudTrail**
+
+#### **Explanation**
+AWS CloudTrail records API calls and actions taken by users in your AWS account, including actions made through the AWS Management Console, AWS SDKs, and AWS CLI. This allows you to track who did what, where, and when within your AWS environment.
+
+---
+
+### **Question 4**
+What is the relation between region and availability zones in Amazon EC2?
+
+#### **Answer**
+**B. Each region is a separate physical location and is further divided into availability zones.**
+
+#### **Explanation**
+A Region is a geographical area (like us-east-1, eu-west-1).
+
+Each Region has multiple Availability Zones (AZs), which are distinct data centers or groups of data centers, connected through low-latency links.
+
+---
+
+### **Question 5**
+Provide a correct ARN value indicating a user with the username John under an account with ID 123456789012.
+
+#### **Answer**
+**arn:aws:iam::123456789012:user/John**
+
+#### **Explanation**
+The Amazon Resource Name (ARN) uniquely identifies a resource in AWS, in this case, the user John under the AWS account with ID 123456789012.
+
+---
+
+### **Question 6**
+AWS Service provides the most cost-optimal way to store large files that are infrequently accessed when the access time is not a priority.
+
+#### **Answer**
+**B. Amazon S3 Glacier**
+
+#### **Explanation**
+Amazon S3 Glacier is designed for long-term, infrequent access storage at a much lower cost compared to standard S3 storage. It is ideal for storing large files that are rarely accessed and where retrieval time is not a high priority.
+
+---
+
+### **Question 7**
+Which of the following use cases cannot be realized with AWS CloudFront?
+
+#### **Answer**
+**D. Optimizing performance of write and read operations against AWS RDS**
+
+#### **Explanation**
+CloudFront is a content delivery network (CDN) designed for distributing static content (like files, media, etc.) and does not optimize database operations such as those performed against AWS RDS.
+
+---
+
+### **Question 8**
+What is the role of a bastion host instance?
+
+#### **Answer**
+**C. Providing secure access to a private network from an external network.**
+
+#### **Explanation**
+A bastion host is used to provide secure access to a private network (such as instances in a private subnet) from an external network (like the internet), typically used for administrative purposes.
+
+---------------------------------------------------------------------------------------------------------
 
 
 ### 1. **Scenario:** You have a microservices application that needs to scale dynamically based on traffic. How would you design an architecture for this using AWS services?
