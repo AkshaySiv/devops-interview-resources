@@ -4,6 +4,22 @@ This document contains AWS-related interview questions that I encountered during
 
 ### **Question 1**
 
+#### Why does the EC2 public IP change every time the instance is recreated?
+
+When an EC2 instance is stopped and started or terminated and recreated, the public IP address associated with the instance changes because AWS dynamically assigns public IPs from a pool of available addresses in the region. Public IPs are not persistent and are released back to the pool when the instance is stopped or terminated.
+
+#### **Solution**
+
+1. **Elastic IP Address**: To ensure a consistent public IP, allocate an Elastic IP address in your AWS account and associate it with your EC2 instance. Elastic IPs are static and remain the same even if the instance is stopped or restarted.
+
+2. **DNS Configuration**: Use a DNS service like Amazon Route 53 to map a domain name to the instance. This way, even if the public IP changes, you can update the DNS record to point to the new IP.
+
+By using Elastic IPs or DNS, you can avoid disruptions caused by changing public IPs.
+
+
+
+### **Question 1**
+
 Imagine a simple Python or Flask application representing a REST service. This service accesses S3, where 500,000 document fragments are stored. It receives a document bookmark as a path parameter, retrieves the corresponding fragments from S3, assembles them into a final JSON document, and returns it.
 
 The service operates at S3's speed with minimal CPU overhead for document assembly. What are the possible deployment options for this service using AWS built-in services?

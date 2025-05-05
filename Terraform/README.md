@@ -72,3 +72,4 @@ terraform show plan.out
 In this example:
 - The `terraform plan` command generates a plan file (`plan.out`).
 - The `terraform show` command displays the contents of the plan file in a readable format.
+
