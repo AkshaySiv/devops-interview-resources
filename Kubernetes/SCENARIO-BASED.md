@@ -117,3 +117,84 @@ if we are using config map as environemnt variable. The application pod needs to
     - If the application does not automatically reload the configuration, send a signal (e.g., SIGHUP) to trigger a reload without restarting the pod.
 
 By following these steps, you can update the API key in the ConfigMap without causing downtime or restarting the application.
+
+
+---
+
+### **Question 5**  
+You are trying to run a pod in your Kubernetes cluster, and the pod is in a "Running" state. However, it is not being scheduled properly. Upon investigation, you discover that the scheduler is not running in the `kube-system` namespace.  
+**How would you debug this issue and manually schedule the pod?**
+
+### **Answer (Brief):**
+
+1. **Debugging the Issue:**
+    - Check the status of the scheduler in the `kube-system` namespace:
+      ```bash
+      kubectl get pods -n kube-system
+      ```
+    - Inspect the logs of the scheduler pod (if it exists):
+      ```bash
+      kubectl logs <scheduler-pod-name> -n kube-system
+      ```
+    - Verify the scheduler is running and healthy:
+      ```bash
+      kubectl describe pod <scheduler-pod-name> -n kube-system
+      ```
+    - If the scheduler is missing, check the control plane configuration and ensure the scheduler is deployed.
+
+2. **Manually Scheduling the Pod:**
+    - Edit the pod's YAML file to include the `nodeName` field under `spec` to manually assign it to a specific node:
+      ```yaml
+      spec:
+        nodeName: <node-name>
+      ```
+    - Apply the updated YAML file:
+      ```bash
+      kubectl apply -f <pod-yaml-file>
+      ```
+
+3. **Verify the Pod Scheduling:**
+    - Check the pod's status to confirm it is running on the specified node:
+      ```bash
+      kubectl get pod <pod-name> -o wide
+      ```
+
+By manually assigning the `nodeName` in the pod's specification, you can bypass the scheduler and ensure the pod is scheduled on the desired node
+
+### **Question 6**  
+You have deployed a StatefulSet with multiple replicas in your Kubernetes cluster. However, you notice that all the replicas are being scheduled on the same node, which poses a risk to high availability.  
+**How would you ensure that Kubernetes spreads the replicas across multiple nodes to improve fault tolerance?**
+
+### **Answer (Brief):**
+
+1. **Configure Pod Anti-Affinity:**
+    - Use `podAntiAffinity` in the pod's `affinity` settings to prevent replicas from being scheduled on the same node:
+      ```yaml
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: your-app
+            topologyKey: "kubernetes.io/hostname"
+      ```
+
+2. **Use Topology Spread Constraints:**
+    - Define `topologySpreadConstraints` to distribute pods across nodes or zones:
+      ```yaml
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: "kubernetes.io/hostname"
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: your-app
+      ```
+
+3. **Verify Pod Distribution:**
+    - Check the node assignment of your pods:
+      ```bash
+      kubectl get pods -o wide
+      ```
+
+By configuring anti-affinity rules or topology spread constraints, you can ensure that Kubernetes schedules replicas across multiple nodes, improving high availability.

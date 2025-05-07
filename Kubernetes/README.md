@@ -66,4 +66,26 @@ spec:
           failureThreshold: 2
 ```
 
+### **Question**
+
+What is the difference between `kubectl apply` and `kubectl create`?
+
+### **Answer:**
+
+- **`kubectl create`:**
+  - Used to create new resources in the cluster , also known as imeperative approach
+  - Fails if the resource already exists.
+  - Example: `kubectl create -f deployment.yaml`.
+
+- **`kubectl apply`:**
+  - Used to create or update resources declaratively.
+  - Can modify existing resources by applying changes from a file.
+  - Example: `kubectl apply -f deployment.yaml`.
+
+- **Key Difference:**
+  - `kubectl create` is for creating resources only, while `kubectl apply` is for both creating and updating resources.
+- Use `kubectl apply` for managing resources declaratively over time.
+- Use `kubectl create` for one-time resource creation.
+
+
 
